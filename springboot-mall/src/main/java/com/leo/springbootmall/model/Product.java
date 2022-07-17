@@ -1,17 +1,20 @@
 package com.leo.springbootmall.model;
 
+import com.leo.springbootmall.constant.ProductCategory;
+
 import java.util.Date;
 
 public class Product {
     private   Integer productid;
     private   String productname;
-    private   String category;
+    private ProductCategory category;
     private   String Imageurl;
     private   Integer price;
     private   Integer stock;
     private   String description;
     private   Date createddate;
     private   Date lastmodifieddate;
+
 
     public Integer getProductid() {
         return productid;
@@ -37,11 +40,11 @@ public class Product {
         Imageurl = imageurl;
     }
 
-    public String getCategory() {
+    public ProductCategory getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(ProductCategory category) {
         this.category = category;
     }
 
@@ -86,5 +89,7 @@ public class Product {
     public void setLastmodifieddate(Date lastmodifieddate) {
         this.lastmodifieddate = lastmodifieddate;
     }
+
+
 
 }
