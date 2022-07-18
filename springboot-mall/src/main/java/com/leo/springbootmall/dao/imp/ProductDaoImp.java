@@ -2,6 +2,7 @@ package com.leo.springbootmall.dao.imp;
 
 
 import com.leo.springbootmall.RowMapper.ProductRowMapper;
+import com.leo.springbootmall.constant.ProductCategory;
 import com.leo.springbootmall.dao.ProductDao;
 import com.leo.springbootmall.dto.ProductRequest;
 import com.leo.springbootmall.model.Product;
@@ -25,12 +26,22 @@ public class ProductDaoImp implements ProductDao {
 
 
     @Override
-    public List<Product> getProducts() {
+    public List<Product> getProducts(ProductCategory category,String search) {
         String sql = "SELECT product_id,product_name,category,image_url,price,stock,description," +
                 "created_date,last_modified_date " +
-                "FROM product";
+                "FROM product WHERE 1=1";
 
         Map<String,Object> map = new HashMap<>();
+
+        if (category != null){
+            sql = sql + " AND category = :category";
+            map.put("category",category.name());
+        }
+
+        if(search != null) {
+            sql = sql + " AND product_name LIKE :search";
+            map.put("search","%" + search + "%");
+        }
 
         List<Product> productList = namedParameterJdbcTemplate.query(sql,map,new ProductRowMapper());
         return productList;
@@ -64,7 +75,7 @@ public class ProductDaoImp implements ProductDao {
 
         Map<String,Object> map = new HashMap<>();
         map.put("productName",productRequest.getProductName());
-        map.put("category",productRequest.getCategory());
+        map.put("category",productRequest.getCategory().toString());
         map.put("imageurl",productRequest.getImageurl());
         map.put("price",productRequest.getPrice());
         map.put("stock",productRequest.getStock());
