@@ -1,28 +1,25 @@
-package com.leo.springbootmall.model;
+package com.leo.springbootmall.dto;
+
 
 import com.leo.springbootmall.constant.ProductCategory;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-public class Product {
-    private   Integer productid;
+public class ProductRequest{
+
+    @NotNull
     private   String productName;
+    @NotNull
     private ProductCategory category;
+    @NotNull
     private   String imageurl;
+    @NotNull
     private   Integer price;
+    @NotNull
     private   Integer stock;
+
     private   String description;
-    private   Date createdDate;
-    private   Date lastModifiedDate;
-
-
-    public Integer getProductid() {
-        return productid;
-    }
-
-    public void setProductid(Integer productid) {
-        this.productid = productid;
-    }
 
     public String getProductName() {
         return productName;
@@ -30,14 +27,6 @@ public class Product {
 
     public void setProductName(String productName) {
         this.productName = productName;
-    }
-
-    public String getImageurl() {
-        return imageurl;
-    }
-
-    public void setImageurl(String imageurl) {
-        this.imageurl = imageurl;
     }
 
     public ProductCategory getCategory() {
@@ -48,7 +37,13 @@ public class Product {
         this.category = category;
     }
 
+    public String getImageurl() {
+        return imageurl;
+    }
 
+    public void setImageurl(String imageurl) {
+        this.imageurl = imageurl;
+    }
 
     public Integer getPrice() {
         return price;
@@ -74,19 +69,5 @@ public class Product {
         this.description = description;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
-    }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Date getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public void setLastModifiedDate(Date lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
 }

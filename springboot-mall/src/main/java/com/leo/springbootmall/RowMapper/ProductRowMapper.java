@@ -14,7 +14,7 @@ public class ProductRowMapper implements RowMapper<Product> {
         Product product = new Product();
 
         product.setProductid(rs.getInt("product_id"));
-        product.setProductname(rs.getString("product_name"));
+        product.setProductName(rs.getString("product_name"));
 
         String categoryStr = rs.getString("category");
         ProductCategory category= ProductCategory.valueOf(categoryStr);
@@ -22,12 +22,12 @@ public class ProductRowMapper implements RowMapper<Product> {
 
         //product.setCategory(ProductCategory.valueOf(rs.getString("category")));
 
-        product.setImageurl(rs.getString("Image_url"));
+        product.setImageurl(rs.getString("image_url"));
         product.setPrice(rs.getInt("price"));
         product.setStock(rs.getInt("stock"));
         product.setDescription(rs.getString("description"));
-        product.setCreateddate(rs.getDate("created_date"));
-        product.setLastmodifieddate(rs.getDate("last_modified_date"));
+        product.setCreatedDate(rs.getDate("created_date"));
+        product.setLastModifiedDate(rs.getDate("last_modified_date"));
 
         return product;
     }
