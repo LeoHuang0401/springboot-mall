@@ -1,7 +1,7 @@
 package com.leo.springbootmall.service.imp;
 
 
-import com.leo.springbootmall.constant.ProductCategory;
+
 import com.leo.springbootmall.dao.ProductDao;
 import com.leo.springbootmall.dto.ProductQueryParams;
 import com.leo.springbootmall.dto.ProductRequest;

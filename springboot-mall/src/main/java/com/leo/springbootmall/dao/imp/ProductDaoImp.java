@@ -2,7 +2,6 @@ package com.leo.springbootmall.dao.imp;
 
 
 import com.leo.springbootmall.RowMapper.ProductRowMapper;
-import com.leo.springbootmall.constant.ProductCategory;
 import com.leo.springbootmall.dao.ProductDao;
 import com.leo.springbootmall.dto.ProductQueryParams;
 import com.leo.springbootmall.dto.ProductRequest;
@@ -34,17 +33,20 @@ public class ProductDaoImp implements ProductDao {
 
         Map<String,Object> map = new HashMap<>();
 
-        if (productQueryParams != null){
+        if (productQueryParams.getCategory() != null){
             sql = sql + " AND category = :category";
             map.put("category",productQueryParams.getCategory().name());
         }
 
-        if(productQueryParams != null) {
+        if(productQueryParams.getSearch() != null) {
             sql = sql + " AND product_name LIKE :search";
-            map.put("search","%" + productQueryParams + "%");
+            map.put("search","%" + productQueryParams.getSearch() + "%");
         }
 
+        sql = sql +" ORDER BY " + productQueryParams.getOrtherBy() + " "+ productQueryParams.getSort();
+
         List<Product> productList = namedParameterJdbcTemplate.query(sql,map,new ProductRowMapper());
+
         return productList;
     }
 
