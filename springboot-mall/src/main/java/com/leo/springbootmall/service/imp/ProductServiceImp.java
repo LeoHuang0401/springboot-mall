@@ -3,6 +3,7 @@ package com.leo.springbootmall.service.imp;
 
 import com.leo.springbootmall.constant.ProductCategory;
 import com.leo.springbootmall.dao.ProductDao;
+import com.leo.springbootmall.dto.ProductQueryParams;
 import com.leo.springbootmall.dto.ProductRequest;
 import com.leo.springbootmall.model.Product;
 import com.leo.springbootmall.service.ProductService;
@@ -19,8 +20,8 @@ public class ProductServiceImp implements ProductService {
 
 
     @Override
-    public List<Product> getProducts(ProductCategory category,String search) {
-        return productDao.getProducts(category,search);
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
+        return productDao.getProducts(productQueryParams);
     }
 
 
