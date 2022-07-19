@@ -1,6 +1,7 @@
 package com.leo.springbootmall.service.imp;
 
 import com.leo.springbootmall.dao.UserDao;
+import com.leo.springbootmall.dto.UserLoginRequest;
 import com.leo.springbootmall.dto.UserRegisterRequest;
 import com.leo.springbootmall.model.User;
 import com.leo.springbootmall.service.UserService;
@@ -37,5 +38,23 @@ public class UserServiceImp implements UserService {
 
         //創建帳號
         return userDao.createUser(userRegisterRequest);
+    }
+
+    @Override
+    public User login(UserLoginRequest userLoginRequest) {
+        User user = userDao.getUserByEmail(userLoginRequest.getEmail());
+
+        if (user == null) {
+            log.warn("該email {} 尚未註冊", userLoginRequest.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        if (user.getPassword().equals(userLoginRequest.getPassword())){
+            return user;
+        }else {
+            log.warn("email的密碼 不正確",userLoginRequest.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
     }
 }
