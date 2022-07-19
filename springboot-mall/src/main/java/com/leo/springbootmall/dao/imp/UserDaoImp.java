@@ -24,7 +24,8 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public User getUserById(Integer userId) {
-        String sql="SELECT user_id,email,password,created_date,last_modified_date FROM user WHERE user_id = :userId";
+        String sql="SELECT user_id,email,password,created_date,last_modified_date " +
+                "FROM user WHERE user_id = :userId";
 
         Map<String,Object> map = new HashMap<>();
         map.put("userId",userId);
@@ -32,6 +33,22 @@ public class UserDaoImp implements UserDao {
         List<User> userList = namedParameterJdbcTemplate.query(sql, map, new UserRowMapper());
 
         if (userList.size() > 0){
+            return userList.get(0);
+        }else {
+            return null;
+        }
+    }
+
+    public User getUserByEmail(String email){
+        String sql = "SELECT user_id,email,password,created_date,last_modified_date" +
+                " FROM user WHERE email = :email";
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("email",email);
+
+        List<User> userList = namedParameterJdbcTemplate.query(sql, map,new UserRowMapper());
+
+        if (userList.size()>0){
             return userList.get(0);
         }else {
             return null;
